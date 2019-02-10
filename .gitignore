@@ -1,8 +1,8 @@
 # IntelliJ
 **/.idea
 
-# Compiled class file
-*.class
+# Compiler output
+**/target
 
 # Log file
 *.log
