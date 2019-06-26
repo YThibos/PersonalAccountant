@@ -6,12 +6,14 @@ import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import be.thibos.personalaccountant.cdi.InMemoryDAO;
 import be.thibos.personalaccountant.model.entities.Expense;
 
 @ApplicationScoped
+@InMemoryDAO
 public class ExpenseMemoryDAO implements GenericDAO<Expense> {
 
-	List<Expense> expenses = new ArrayList<>();
+	private List<Expense> expenses = new ArrayList<>();
 
 	@Override
 	public Optional<Expense> get(long id) {
@@ -30,7 +32,7 @@ public class ExpenseMemoryDAO implements GenericDAO<Expense> {
 
 	@Override
 	public void update(Expense expense) {
-
+		throw new UnsupportedOperationException("Not yet implemented. Will do so when the need arises.");
 	}
 
 	@Override

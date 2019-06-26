@@ -7,5 +7,6 @@ module PersonalAccountant.renameMe {
 	requires org.apache.commons.lang3;
 	requires cdi.api;
 	requires gson;
+	requires javax.inject;
 
 }

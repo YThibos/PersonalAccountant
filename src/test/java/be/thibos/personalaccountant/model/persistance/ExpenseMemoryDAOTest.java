@@ -7,14 +7,28 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.jboss.weld.junit5.WeldInitiator;
+import org.jboss.weld.junit5.WeldJunit5Extension;
+import org.jboss.weld.junit5.WeldSetup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import be.thibos.personalaccountant.cdi.InMemoryDAO;
 import be.thibos.personalaccountant.model.entities.Expense;
 
+@ExtendWith(WeldJunit5Extension.class)
 class ExpenseMemoryDAOTest {
 
+	@Inject
+	@InMemoryDAO
 	private ExpenseMemoryDAO expenseMemoryDAO;
+
+	@WeldSetup
+	private WeldInitiator weldInitiator = WeldInitiator.of(WeldInitiator.createWeld()
+			                                                       .addBeanClasses(ExpenseMemoryDAO.class));
 
 	@BeforeEach
 	void setUp() {

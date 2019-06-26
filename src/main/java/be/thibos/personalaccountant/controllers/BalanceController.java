@@ -7,20 +7,27 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import be.thibos.personalaccountant.cdi.InMemoryDAO;
 import be.thibos.personalaccountant.model.entities.Expense;
 import be.thibos.personalaccountant.model.persistance.ExpenseMemoryDAO;
 
+@ApplicationScoped
 public class BalanceController {
 
 	private GsonBuilder gsonBuilder = new GsonBuilder();
 
-	private ExpenseMemoryDAO expenseDAO = new ExpenseMemoryDAO();
+	@Inject
+	@InMemoryDAO
+	private ExpenseMemoryDAO expenseDAO;
 
 	@SuppressWarnings("StringBufferMayBeStringBuilder")
 	public String printHistory() {

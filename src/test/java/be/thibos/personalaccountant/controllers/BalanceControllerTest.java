@@ -8,21 +8,28 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
+import javax.inject.Inject;
+
+import org.jboss.weld.junit5.WeldInitiator;
+import org.jboss.weld.junit5.WeldJunit5Extension;
+import org.jboss.weld.junit5.WeldSetup;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import be.thibos.personalaccountant.model.entities.Expense;
+import be.thibos.personalaccountant.model.persistance.ExpenseMemoryDAO;
 
+@ExtendWith(WeldJunit5Extension.class)
 class BalanceControllerTest {
 
 	private static final String TESTFILE_PATH = "C:/Users/Thibos/Desktop/testfile.json";
 
-	private BalanceController balanceController;
+	@WeldSetup
+	private WeldInitiator weldInitiator = WeldInitiator.of(WeldInitiator.createWeld()
+			                                                       .addBeanClasses(BalanceController.class, ExpenseMemoryDAO.class));
 
-	@BeforeEach
-	void setUp() {
-		balanceController = new BalanceController();
-	}
+	@Inject
+	private BalanceController balanceController;
 
 	@Test
 	void addingAndPrintingMultipleExpenses_notSoPrettyFormat() {
