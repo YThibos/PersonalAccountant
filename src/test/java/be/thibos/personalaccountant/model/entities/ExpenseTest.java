@@ -4,34 +4,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
 
 import org.junit.jupiter.api.Test;
 
 class ExpenseTest {
 
 	@Test
-	void expensesAreEqual_whenAmountAndTypeAreEqual() {
-		BigDecimal someAmount = BigDecimal.valueOf(13.37);
-		Expense expense1 = Expense.of(someAmount);
-		Expense expense2 = Expense.of(someAmount);
-
-		assertThat(expense1).isEqualTo(expense2);
+	void incomes_staticFactoryMethod_onlyTakesValidInput() {
+		assertThatIllegalArgumentException().isThrownBy(() -> Expense.of(null, "something", LocalDate.now()));
+		assertThatIllegalArgumentException().isThrownBy(() -> Expense.of(BigDecimal.ONE, null, LocalDate.now()));
+		assertThatIllegalArgumentException().isThrownBy(() -> Expense.of(BigDecimal.ONE, "", LocalDate.now()));
+		assertThatIllegalArgumentException().isThrownBy(() -> Expense.of(BigDecimal.ONE, "something", null));
 	}
 
 	@Test
-	void expensesNotEqual_whenAmountIsDifferent() {
-		BigDecimal someAmount = BigDecimal.valueOf(13.37);
-		BigDecimal anotherAmount = BigDecimal.valueOf(73.31);
-		Expense expense1 = Expense.of(someAmount);
-		Expense expense2 = Expense.of(anotherAmount);
+	void incomes_staticFactoryMethod_withValidInputs_doesNotReturnNull() {
+		Expense income1 = Expense.of(BigDecimal.ONE, "Work", LocalDate.now());
 
-		assertThat(expense1).isNotEqualTo(expense2);
+		assertThat(income1).isNotNull();
 	}
 
 	@Test
-	void expenseOf_nullNegativeOrZero_throwsIllegalArgumentException() {
-		assertThatIllegalArgumentException().isThrownBy(() -> Expense.of(null));
-		assertThatIllegalArgumentException().isThrownBy(() -> Expense.of(BigDecimal.ZERO));
-		assertThatIllegalArgumentException().isThrownBy(() -> Expense.of(BigDecimal.valueOf(-1)));
+	void incomesAreEqual_onTimeStampAmountAndSource() {
+		Expense income1 = Expense.of(BigDecimal.valueOf(13.37), "Work", LocalDate.of(2019, Month.MAY, 25));
+		Expense income2 = Expense.of(BigDecimal.valueOf(13.37), "Work", LocalDate.of(2019, Month.MAY, 25));
+
+		assertThat(income1).isEqualTo(income2);
 	}
 }

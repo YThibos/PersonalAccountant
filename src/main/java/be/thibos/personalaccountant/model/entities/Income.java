@@ -5,27 +5,27 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Expense {
+public class Income {
 
 	private final BigDecimal amount;
 	private final String source;
 	private final LocalDate date;
 
-	private Expense(BigDecimal amount, String source, LocalDate date) {
+	private Income(BigDecimal amount, String source, LocalDate date) {
 		this.amount = validateAmount(amount);
 		this.source = validateSource(source);
 		this.date = validateDate(date);
 	}
 
-	public static Expense of(BigDecimal amount, String source, LocalDate date) {
-		return new Expense(amount, source, date);
+	public static Income of(BigDecimal amount, String source, LocalDate date) {
+		return new Income(amount, source, date);
 	}
 
 	private BigDecimal validateAmount(BigDecimal amount) {
 		if (amount != null) {
 			return amount;
 		} else {
-			throw new IllegalArgumentException("An amount cannot be null for the creation of an Expense.");
+			throw new IllegalArgumentException("An amount cannot be null for the creation of an Income.");
 		}
 	}
 
@@ -33,7 +33,7 @@ public class Expense {
 		if (isNotBlank(source)) {
 			return source;
 		} else {
-			throw new IllegalArgumentException("A source cannot be null for the creation of an Expense.");
+			throw new IllegalArgumentException("A source cannot be null for the creation of an Income.");
 		}
 	}
 
@@ -41,7 +41,7 @@ public class Expense {
 		if (date != null) {
 			return date;
 		} else {
-			throw new IllegalArgumentException("A date cannot be null for the creation of an Expense.");
+			throw new IllegalArgumentException("A date cannot be null for the creation of an Income.");
 		}
 	}
 
@@ -54,7 +54,7 @@ public class Expense {
 			return false;
 		}
 
-		Expense income = (Expense) o;
+		Income income = (Income) o;
 
 		if (!amount.equals(income.amount)) {
 			return false;
@@ -75,7 +75,7 @@ public class Expense {
 
 	@Override
 	public String toString() {
-		return "Expense{" +
+		return "Income{" +
 		       "amount=" + amount +
 		       ", source='" + source + '\'' +
 		       ", date=" + date +
