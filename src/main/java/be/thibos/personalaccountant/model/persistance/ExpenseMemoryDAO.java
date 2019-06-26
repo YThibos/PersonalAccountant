@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import be.thibos.personalaccountant.cdi.InMemoryDAO;
+import be.thibos.personalaccountant.cdi.qualifiers.InMemoryDAO;
 import be.thibos.personalaccountant.model.entities.Expense;
 
 @ApplicationScoped

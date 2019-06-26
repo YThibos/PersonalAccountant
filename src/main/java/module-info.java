@@ -8,5 +8,6 @@ module PersonalAccountant.renameMe {
 	requires cdi.api;
 	requires gson;
 	requires javax.inject;
+	requires java.annotation;
 
 }

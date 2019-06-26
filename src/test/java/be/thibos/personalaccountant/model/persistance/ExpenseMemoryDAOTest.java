@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import be.thibos.personalaccountant.cdi.InMemoryDAO;
+import be.thibos.personalaccountant.cdi.qualifiers.InMemoryDAO;
 import be.thibos.personalaccountant.model.entities.Expense;
 
 @ExtendWith(WeldJunit5Extension.class)

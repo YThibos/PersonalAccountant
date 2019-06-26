@@ -16,6 +16,7 @@ import org.jboss.weld.junit5.WeldSetup;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import be.thibos.personalaccountant.cdi.GsonBuilderDelegate;
 import be.thibos.personalaccountant.model.entities.Expense;
 import be.thibos.personalaccountant.model.persistance.ExpenseMemoryDAO;
 
@@ -26,7 +27,9 @@ class BalanceControllerTest {
 
 	@WeldSetup
 	private WeldInitiator weldInitiator = WeldInitiator.of(WeldInitiator.createWeld()
-			                                                       .addBeanClasses(BalanceController.class, ExpenseMemoryDAO.class));
+			                                                       .addBeanClasses(BalanceController.class,
+			                                                                       ExpenseMemoryDAO.class,
+			                                                                       GsonBuilderDelegate.class));
 
 	@Inject
 	private BalanceController balanceController;
